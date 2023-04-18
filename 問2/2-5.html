@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="UTF-8">
+        <title>2-5</title>
+        <style>
+            div{
+                text-align: center;
+            }
+            .ptn1{
+                font-size: 200px;
+                color: red;
+            }
+            .ptn2{
+                font-size: 50px;
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <p>練習問題2-5</p>
+        <div>
+        <script>
+            var str = "G○○gle";
+            for(var i = 0; i < str.length; i++){
+                if(i % 2 == 0){
+                    document.write("<label class='ptn1'>");
+                }else{
+                    document.write("<label class='ptn2'>");
+                }
+                document.write(str.substring(i,i+1)+"</label>");
+            }
+        </script>
+        </div>
+    </body>
+</html>
