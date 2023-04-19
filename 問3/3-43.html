@@ -1,0 +1,29 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>3-43</title>
+</head>
+<body>
+	<p>練習問題3-43<br>
+	「fn」＋「f12」を押してconsoleを確認してね！</p>
+	<script>
+		loop(3);
+		loop(5);
+		loop(7);
+		for(let j=3; j<8; j=j+2){
+			loop(j);
+		}
+
+		function loop(num){
+			console.log("関数loopに"+num+"を渡して実行");
+			for(let i=0; i<num; i++){
+				let str = "";
+				for(let j=0; j<=i; j++){
+					str = str + "＊";
+				}
+				console.log(str);
+			}
+		}
+	</script>
+</body>
+</html>
