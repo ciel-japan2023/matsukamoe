@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>5-4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<p>練習問題5-4</p>
+    <input type="text" id="num1">
+    ＋
+    <input type="text" id="num2">
+    <button id="btn">ボタン</button>
+    <div id="str"></div>
+    <script>
+        $("#btn").on("click",function(){
+            let num1 = $("#num1").val();
+            let num2 = $("#num2").val();
+            if(isNaN(num1) || isNaN(num2)){
+                alert("数値以外が入力されています。")
+            }else{
+                $("#str").text(Number(num1)+Number(num2));
+            }
+        })
+    </script>
+</body>
+</html>

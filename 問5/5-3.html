@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>5-3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<p>練習問題5-3</p>
+    <input type="text" id="num1">
+    ＋
+    <input type="text" id="num2">
+    <button id="btn">ボタン</button>
+    <div id="str"></div>
+    <script>
+        $("#btn").on("click",function(){
+            let num1 = Number($("#num1").val());
+            let num2 = Number($("#num2").val());
+            $("#str").text(num1+num2);
+        })
+    </script>
+</body>
+</html>
