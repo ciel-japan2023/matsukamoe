@@ -18,7 +18,8 @@
 <body>
 	<p>練習問題6-1</p>
     <p id="str">0～1000の間でランダムに生成された数字を当ててください。</p>
-    <div id="history">【入力された数字】<br></div>
+    【入力された数字】<br>
+    <div id="history"></div>
     <div id="status">数字を入力してください。</div>
     <input type="text" id="inp">
     <button id="btn">Go</button>
@@ -28,6 +29,7 @@
         $("#inp").focus();
 
         let random = Math.floor(Math.random()*1001);
+        console.log(random);
         $("#btn").on("click",function(){
             let inp = Number($("#inp").val());
             if(inp == null || inp == ""){
@@ -43,27 +45,15 @@
                 $("#status").css("color","#000");
                 //数字の判定
                 if(random > inp){
-                    $("#history").append(inp+" 小さいです。<br>");
+                    $("#history").prepend(inp+" 正解より小さいです。<br>");
                 }else if(random < inp){
-                    $("#history").append(inp+" 大きいです。<br>");
+                    $("#history").prepend(inp+" 正解より大きいです。<br>");
                 }else{
-                    $("#history").append(inp+" 正解です！");
+                    $("#history").prepend(inp+" 正解です！<br>");
                 }
             }
             $("#inp").val("");
             $("#inp").focus();
-
-            console.log($("#history").scrollTop());
-
-            // let hisPosition = document.getElementById("#history");
-            // hisPosition.scrollIntoView(false);
-
-            // let hisPosition = document.getElementById("#history");
-            // hisPosition.scrollTo(0, $("#history").scrollTop());
-            
-            // $("#history").scroll(function(){
-            //     console.log($("#history").scrollTop());
-            // });
         });
     </script>
 </body>
