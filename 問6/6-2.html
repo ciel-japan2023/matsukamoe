@@ -20,7 +20,7 @@
     <p>練習問題6-2</p>
     <input type="text" id="display">
     <br>
-    <button id="delete">▷</button>
+    <button id="delete">◁</button>
     <button id="btn7">7</button>
     <button id="btn8">8</button>
     <button id="btn9">9</button>
@@ -45,65 +45,105 @@
     <button id="plus">+</button>
 
     <script>
-        let dis_str = "";
-        let dis_str_bef = "";
-        let dis_num;
-        let btn_bef = "";
+        let dis_str = "";       // ディスプレイの文字列
+        let dis_num = "";       // ディスプレイの文字列の数値型
+        let equal_flg = false;  // equalの判定
 
-        // // ▷ボタンが押された場合
-        // $("#delete").on("click", function(){
-        //     dis_str = dis_str.slice(0, dis_str.length-1);
-        // });
-        // // Cボタンが押された場合
-        // $("#clear").on("click", function(){
-        //     dis_str = "";
-        // });
-        // // ACボタンが押された場合
-        // $("#allclear").on("click", function(){
-        //     dis_str_bef = dis_str;
-        //     dis_str = "";
-        // });
-        // // =ボタンが押された場合
-        // $("#equal").on("click", function(){
-        //     dis_str_bef = dis_str;
-        //     dis_str = "";
-        // });
-        // // .ボタンが押された場合
-        // $("#dot").on("click", function(){
-        //     //dis_str = Number(dis_str);
-        // });
-        
         $("button").on("click", function(){
             // 押されたボタンを取得
             let inp_id = $(this).attr("id");
             inp_btn = document.getElementById(inp_id).textContent;
-            // console.log(inp_id);
-            // console.log(inp_btn);
 
+            // 押されたボタンによって処理を変える
             if(inp_id=="delete"){
-                // ▷ボタンが押された場合
+                // ◁ボタンが押された場合
                 dis_str = dis_str.slice(0, dis_str.length-1);
+                dis_num = dis_num.slice(0, dis_num.length-1);
             }else if(inp_id=="clear"){
                 // Cボタンが押された場合
-                dis_str = "";
+                for(i=dis_num.length; i>0; i--){
+                    let c_check = dis_num.slice(i-1, i);
+                    if(c_check=="/" || c_check=="*" || c_check=="-" || c_check=="+"){
+                        dis_num = dis_num.slice(0,i-1);
+                        dis_str = dis_str.slice(0,i-1);
+                        break;
+                    }
+                }
             }else if(inp_id=="allclear"){
                 // ACボタンが押された場合
-                dis_str_bef = dis_str;
                 dis_str = "";
+                dis_num = "";
             }else if(inp_id=="equal"){
                 // =ボタンが押された場合
-                dis_str_bef = dis_str;
-                dis_str = dis_num;
+                dis_str = Function('"use strict";return (' + dis_num + ')')();
+                dis_num = "";
+                equal_flg = true;
+            }else if(inp_id=="divided"){
+                // ÷ボタンが押された場合
+                if(calc_def(dis_num)){
+                    dis_num += "/";
+                    dis_str += inp_btn;
+                }
+                equal_flg = false;
+            }else if(inp_id=="times"){
+                // ×ボタンが押された場合
+                if(calc_def(dis_num)){
+                    dis_num += "*";
+                    dis_str += inp_btn;
+                }
+                equal_flg = false;
+            }else if(inp_id=="minus"){
+                // -ボタンが押された場合
+                if(calc_def(dis_num)){
+                    dis_num += "-";
+                    dis_str += inp_btn;
+                }
+                equal_flg = false;
+            }else if(inp_id=="plus"){
+                // +ボタンが押された場合
+                if(calc_def(dis_num)){
+                    dis_num += "+";
+                    dis_str += inp_btn;
+                }
+                equal_flg = false;
+            }else if(inp_id=="btn0" || inp_id=="btn00"){
+                if(equal_flg){
+                    // equal_flgがtrueの場合
+                    dis_str = "";
+                    dis_num = "";
+                    equal_flg = false;
+                }
+                if(dis_str!=""){
+                    dis_str = inp_btn;
+                    dis_num = inp_btn;
+                }
             }else{
+                if(equal_flg){
+                    // equal_flgがtrueの場合
+                    dis_str = "";
+                    dis_num = "";
+                    equal_flg = false;
+                }
                 // ディスプレイに文字列表示
+                dis_num += inp_btn;
                 dis_str += inp_btn;
-                console.log(Number(dis_str));
-                console.log(typeof Number(dis_str));
+                console.log(Function('"use strict";return (' + dis_num + ')')());
+                console.log(typeof Function('"use strict";return (' + dis_num + ')')());
             }
 
             // ディスプレイに文字列表示
             $("#display").val(dis_str);
         });
+
+        // dis_numの末尾が ÷,×,-,+ の場合をfalse返す
+        function calc_def(dis_num){
+            let str = dis_num.slice(dis_num.length-1, dis_num.length);
+            if(str=="/" || str=="*" || str=="-" || str=="+"){
+                return false;
+            }else{
+                return true;
+            }
+        }
     </script>
 </body>
 </html>
