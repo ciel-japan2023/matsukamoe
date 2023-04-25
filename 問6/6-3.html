@@ -50,13 +50,13 @@
 		<!-- ゲームクリア -->
 		<div id="game_clear" hidden>
 			<div class="title"><label>Game Clear!!</label></div>
-			<div id="start_text"><label>Please Push ENTER KEY</label></div>
+			<div id="restart_text"><label>Please Push ENTER KEY</label></div>
 		</div>
 
 		<!-- ゲームオーバー -->
 		<div id="game_over" hidden>
 			<div class="title"><label>Game Over...</label></div>
-			<div id="start_text"><label>Please Push ENTER KEY</label></div>
+			<div id="restart_text"><label>Please Push ENTER KEY</label></div>
 		</div>
 	</div>
 
@@ -75,6 +75,7 @@
 	<input type="text" id="input"/>
 
 	<script>
+		let game_flg = false;
 		$(document).ready(function(){
 			// ゲームの状況（1:スタート画面, 2:ゲーム画面）
 			let status = "1";
@@ -147,9 +148,14 @@
 								$("#inv_" + i).hide();
 							}
 						}
-					}else{
-                        console.log("test");
-                    }
+					}
+					if(game_flg){
+						// ゲームオーバーまたはゲームクリアの場合
+						if(e.keyCode == "13"){
+							// Enterキー押下時
+							location.reload();
+						}
+					}
 				}
 			});
 		});
@@ -173,17 +179,19 @@
 					// ゲームクリア
 					gameClear();
 				}
-			}, 1);
+			}, 50);
 		}
 
 		// ゲームクリアを表示
 		function gameClear(){
+			game_flg = true;
 			clearInterval(gameStart);
 			$("#game").hide();
 			$("#game_clear").show();
 		}
 		// ゲームオーバーを表示
 		function gameOver(){
+			game_flg = true;
 			clearInterval(gameStart);
 			$("#game").hide();
 			$("#game_over").show();

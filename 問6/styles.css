@@ -27,7 +27,7 @@
 	margin-top: 100px;
 	font-size: 60px;
 }
-#start_text, #game_clear_text, #game_over_text{
+#start_text, #restart_text, #game_clear_text, #game_over_text{
 	margin-top: 100px;
 	font-size: 20px;
 }
